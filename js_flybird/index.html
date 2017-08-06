@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Fly Bird</title>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+  <div id="wrapBg">
+    <div id="headTitle">
+      <img src="img/bird0.png" alt="" id="headBird" />
+    </div>
+    <button id="startBtn"></button>
+    <div id="grassLand1"></div>
+    <div id="grassLand2"></div>
+  </div>
+  <script src="block.js">  </script>
+  <script src="bird.js"></script>
+  <script src="block.js"></script>
+  <script>
+  var jsWrapBg = document.getElementById('wrapBg');
+  var jsHeadTitle = document.getElementById('headTitle');
+  var jsHeadBird = document.getElementById('headBird');
+  var blocksArr = [];
+  // 开关量
+  var index = 0;
+  var y = 3;
+  var imgArr = ["img/bird0.png", "img/bird1.png"];
+  var jsGrassLand1 = document.getElementById('grassLand1');
+  var jsGrassLand2 = document.getElementById('grassLand2');
+  var jsStartBtn = document.getElementById('startBtn');
+  jsStartBtn.addEventListener('click', function () {
+    jsHeadTitle.style.display = 'none';
+    clearInterval(headWaveTimer);
+    jsStartBtn.style.display = 'none';
+    // js动态插入小鸟
+    // 面向对象编程
+    bird.showBird(jsWrapBg);
+    bird.flyBird();
+    bird.wingWave();
+    window.addEventListener('keydown', function (event) {
+      var keyCode = event.keyCode;
+      if (keyCode === 32) {
+        bird.fallSpeed = -8;
+      }
+    }, false);
+    var b = new Block();
+    b.createBlock();
+    blocksArr.push(b);
+  }, false);
+  var headWaveTimer = setInterval(function () {
+    y *= -1;
+    jsHeadTitle.style.top = jsHeadTitle.offsetTop + y + 'px';
+    // offsetTop ? offset？ 子元素离父元素的距离
+    // 相对定位，绝对定位
+    jsHeadBird.src = imgArr[index];
+    index++;
+    if (index > 1) {
+      index = 0;
+    }
+  }, 200);
+  var landTimer = setInterval(function () {
+    if (jsGrassLand1.offsetLeft <= -343) {
+      jsGrassLand1.style.left = "343px";
+    }
+    if (jsGrassLand2.offsetLeft <= -343) {
+      jsGrassLand2.style.left = "343px";
+    }
+    jsGrassLand1.style.left = jsGrassLand1.offsetLeft - 3 + "px";
+    jsGrassLand2.style.left = jsGrassLand2.offsetLeft - 3 + "px";
+  }, 30)
+  </script>
+</body>
+</html>

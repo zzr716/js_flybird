@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  // 定义的作用域范围内的变量，会在这个作用域内产生变量提升的效果
+  console.log(a); // undefined 【Uncaught ReferenceError: a is not defined】
+  // var a = 2;
+  [let a = 2; let，块级作用域，取消了变量提升的效果] 
+  console.log(a); // 2  【没有执行】
+  </script>
+</body>
+</html>
